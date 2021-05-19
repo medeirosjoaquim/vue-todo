@@ -1,0 +1,66 @@
+#left, #center, #right {
+  height: 100%;
+  width: 33.333333%;
+  display: flex;
+  justify-content: center;
+  padding-top: 4rem;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  box-sizing: border-box;
+}
+body {
+  min-height: 100%;
+}
+
+#desktop {
+  background-color: #2a9d8f !important;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+.app--window {
+  cursor: -moz-grab;
+  cursor: -webkit-grab;
+  cursor: move;
+  width: 80%;
+  position: relative;
+  background-color: #ccc;
+  border: 1px solid #333;
+  border-top: 4rem solid #000080;
+  padding: 2rem;
+  height: 32rem;
+  border-radius: 15px;
+
+}
+.app--window .title {
+  position: absolute;
+  top: -3.25rem;
+  left: 50%;
+  transform: translateX(-50%)
+
+}
+.app--window .title  span {
+  color: #fafafa;
+  font-size: 32px;
+  font-weight: bold;
+}
+.app--window button {
+  padding: 0.75rem 2rem;
+  border-radius: 5px;
+}
+
+input {
+  border: none;
+  padding: 0.75rem;
+  border-radius: 5px;
+}
+
+@media only screen and (min-width: 800px) {
+
+}

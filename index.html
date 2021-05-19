@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <!-- CSS only -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
+  <title>Vue Todo</title>
+</head>
+
+<body>
+  <div id="desktop">
+    <div id="left">
+      <div class="app--window">
+        <div class="title"><span>Todo App</span></div>
+        <div class="row text-center">
+          <form id="todo-form" method="post" action="#" @submit.prevent="submit">
+            <input type="text" 
+                  name="task" 
+                  id="task" 
+                  placeholder="Task" 
+                  required 
+                  autocomplete="off"
+                  v-model="task" />
+            <button class="">Add</button>
+          </form>
+        </div>
+        <div class="row mt-4">
+          <ul id="list-items">
+            <li v-for="item in items" :key="item.message">
+              {{ item.message }} - {{ item.time }}
+            </li>
+          </ul>
+        </div>
+      </div> 
+    </div>
+    <div id="center"></div>
+    <div id="right"></div>
+  </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.3/dragula.min.js'></script>
+  <script>
+    // drag app
+        dragula([document.querySelector('#left'),
+        document.querySelector('#center') ,
+        document.querySelector('#right')]);
+    // get date/time
+    options1 = {
+    weekday: "short",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "numeric",
+    minute: "2-digit",    
+  };
+
+  const getDateTime = () => new Date().toLocaleString("en", options1);
+  // store todos
+  const items = JSON.parse(localStorage.getItem('todos')) || []
+    const listItems = new Vue({
+      el: '#list-items',
+      data: {
+        parentMessage: 'Parent',
+        items
+      }
+    })
+    new Vue(
+      {
+        el: "#todo-form",
+        data: () => {
+          return {
+            isVisible: false,
+            task: '',
+          }
+        },
+        methods: {
+          submit: () => {
+            items.push({ message: this.task.value, time: getDateTime() });
+            localStorage.setItem('todos', JSON.stringify(items))
+            console.log(this.task.value);
+            this.task.value = ''
+          }
+        }
+
+      }
+    );
+
+  </script>
+</body>
+
+</html>
